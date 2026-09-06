@@ -74,3 +74,11 @@ plot(t/60,energy,'LineWidth',1.5);
 grid on;
 xlabel('Time, min'); ylabel('Specific orbital energy, J/kg');
 title('Numerical Energy Check');
+% Vis-viva cross-check at the final sample
+vVisViva = sqrt(mu*(2/rMag(end) - 1/a(end)));
+relErr   = abs(vVisViva - vMag(end))/vMag(end);
+fprintf("Vis-viva speed:   %.6f m/s (sim: %.6f, rel err %.2e)\n", ...
+    vVisViva, vMag(end), relErr);
+
+% Closed-form period cross-check
+fprintf("Analytic period:  %.4f min\n", 2*pi*sqrt(a(end)^3/mu)/60);
